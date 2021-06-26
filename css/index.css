@@ -1,0 +1,148 @@
+/* VIEW PALETTE */
+
+* {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+:root {
+    --dazzleBlue: #3D5A80;
+    --cerulean: #98C1D9;
+    --lightCyan: #E0FBFC;
+    --burntSienna: #EE6C4D;
+    --gunMetal: #293241;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+select {
+    appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: var(--lightCyan);
+    background-image: none;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    transition: all .1s ease-in;
+}
+
+a:hover {
+    font-size: 110%;
+    color: var(--lightCyan);
+}
+
+strong {
+    color: #19B5FE;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    padding: .5rem 1rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-content {
+    position: relative;
+    width: 100vw;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card {
+    border-radius: 3px;
+    background-color: #FFF;
+    box-shadow: 1px 1px 5px 1px lightgray;
+}
+
+.card-head {
+    padding: .7rem;
+    border-radius: 3px;
+    color: var(--cerulean);
+    border-top: 5px solid var(--cerulean);
+    border-bottom: .5px solid lightgray;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* .card-body {
+    font-family: 'Ubuntu Mono', monospace;
+} */
+
+.card-info {
+    margin: 0;
+    /* font-size: smaller; */
+    font-weight: bolder;
+    text-transform: capitalize;
+    font-family: 'Ubuntu Mono', monospace !important;
+}
+
+.card-content {
+    border: none;
+    outline: none;
+    font-size: larger;
+    padding: .5rem .5rem;
+}
+
+.header {
+    background-color: var(--dazzleBlue);
+}
+
+.header-title {
+    margin: 0;
+    color: #FFF;
+    padding-left: 1rem;
+    transform: scale(1.1);
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.footer {
+    position: absolute;
+    width: 100vw;
+    margin: 0;
+    bottom: 0;
+    color: #FFF;
+    background-color: var(--gunMetal);
+}
+
+.footer-title {
+    text-align: center;
+    font-weight: lighter;
+}
+
+.footer-students {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.footer-students>* {
+    list-style-type: none;
+}
+
+@media only screen and (max-width: 450px) {
+    .footer {
+        position: unset;
+    }
+}
+
+#text-right {
+    color: grey;
+}

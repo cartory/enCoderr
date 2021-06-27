@@ -1,9 +1,8 @@
 // CONSTANTS
 let encode = true
 let coding = 'caesar'
-let alphabet = 'abcdefghijklmnñopqrstuvwxyz'
 let params = [
-    alphabet,       // ALPHABET
+    'abcdefghijklmnñopqrstuvwxyz',       // ALPHABET
     '',             // MESSAGE TEXT
     '2',            // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
 ]

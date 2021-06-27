@@ -38,7 +38,6 @@ const labelCoding = {
 }
 
 // DOCUMENT ELEMENTS 
-const audio = new Audio('assets/type.mp3')
 const select = document.getElementById('coder')
 const selectCoding = document.getElementById('coding')
 
@@ -93,8 +92,7 @@ selectCoding.addEventListener('change', ({ target }) => {
     writeText()
 })
 
-textLeft.addEventListener('input', async ({ target }) => {
-    await audio.play()
+textLeft.addEventListener('input', ({ target }) => {
     params[1] = target.value
     writeText()
 })

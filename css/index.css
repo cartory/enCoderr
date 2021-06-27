@@ -67,8 +67,8 @@ strong {
 }
 
 .container {
+    padding: 0 .5rem;
     display: flex;
-    padding: 0 1rem;
     flex-direction: row;
     align-items: center;
 }

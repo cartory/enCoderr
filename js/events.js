@@ -15,7 +15,7 @@ const encoding = {
         return caesarEncode(alpha, text, moves)
     },
     vigenere: ([alpha, text, key]) => {
-        if (key.length === 0) return 'Empty Key'
+        if (key.length < 1) return 'Empty Key'
         return vigenereEncode(alpha, text, key)
     },
 }
@@ -27,7 +27,8 @@ const decoding = {
         return caesarDecode(alpha, text, moves)
     },
     vigenere: ([alpha, text, key]) => {
-        return text
+        if (key.length < 1) return 'Empty Key'
+        return vigenereDecode(alpha, text, key)
     },
 }
 
@@ -37,6 +38,7 @@ const labelCoding = {
 }
 
 // DOCUMENT ELEMENTS 
+const audio = new Audio('assets/type.mp3')
 const select = document.getElementById('coder')
 const selectCoding = document.getElementById('coding')
 
@@ -91,7 +93,8 @@ selectCoding.addEventListener('change', ({ target }) => {
     writeText()
 })
 
-textLeft.addEventListener('input', ({ target }) => {
+textLeft.addEventListener('input', async ({ target }) => {
+    await audio.play()
     params[1] = target.value
     writeText()
 })

@@ -28,13 +28,14 @@ const caesarEncode = (mi, message, moves = 0) => {
  * @returns {string} encoded string
  */
 const vigenereEncode = (mi, message, key) => {
-    message = message.replaceAll(' ', '')
+    let chars = 0
     let code = message.split('').map((letter, index) => {
         let a = mi.indexOf(letter)
-        let b = index % key.length
+        chars += a > -1 ? 0 : 1
+        let b = (index - chars) % key.length
         b = mi.indexOf(key[b])
-        return a !== -1 ? mi[(a + b) % mi.length] : letter
+        return a > -1 ? mi[(a + b) % mi.length] : letter
     })
 
-    return code.join('').match(/.{1,5}/g).join(' ')
+    return code.join('')
 }

@@ -1,4 +1,3 @@
-
 /**
  * CryptoClassic - Caesar Encode
  * @param {string} mi is Alphabet
@@ -11,7 +10,7 @@ const caesarDecode = (mi, code, moves = 0) => {
 
     let message = code.split('').map(letter => {
         let index = ci.indexOf(letter)
-        return index !== -1 ? mi[index] : letter
+        return index < 0 ? letter : mi[index]
     })
 
     return message.join('')
@@ -25,15 +24,18 @@ const caesarDecode = (mi, code, moves = 0) => {
  * @returns {string} decoded string
  */
 const vigenereDecode = (mi, code, key) => {
-    let res = message.split('').map((letter, index) => {
+    let chars = 0
+    let message = code.split('').map((letter, index) => {
         let a = mi.indexOf(letter)
-        let b = index % key.length
+        chars += a < 0 ? 1 : 0
 
+        let b = (index - chars) % key.length
         b = mi.indexOf(key[b])
 
+        let c = (a - b) % mi.length
 
-        return a !== -1 ? mi[(a + b) % message.length] : letter
+        return a < 0 ? letter : c < 0 ? mi[mi.length + c] : mi[c]
     })
 
-    return res.join('')
+    return message.join('')
 }

@@ -1,13 +1,34 @@
 // CONSTANTS
 let encode = true
+let coding = 'caesar'
 let alphabet = 'abcdefghijklmnñopqrstuvwxyz'
+let params = [
+    alphabet,       // ALPHABET
+    '',             // MESSAGE TEXT
+    '0',            // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
+]
 
 const encoding = {
-    caesar: caesarEncode,
+    caesar: ([alpha, text, moves]) => {
+        moves = Number.parseInt(moves)
+        if (!moves && moves !== 0) return 'Syntax Error'
+        return caesarEncode(alpha, text, moves)
+    },
+    vigenere: ([alpha, text, key]) => {
+        if (key.length === 0) return 'Empty Key'
+        return vigenereEncode(alpha, text, key)
+    },
 }
 
 const decoding = {
-    caesar: caesarDecode,
+    caesar: ([alpha, text, moves]) => {
+        moves = Number.parseInt(moves)
+        if (!moves && moves !== 0) return 'Syntax Error'
+        return caesarDecode(alpha, text, moves)
+    },
+    vigenere: ([alpha, text, key]) => {
+        return text
+    },
 }
 
 // DOCUMENT ELEMENTS 
@@ -18,7 +39,7 @@ const alphaField = document.getElementById('alpha')
 
 // MOVES-KEY-...
 const label1 = document.getElementById('label-1')
-const field1 = document.getElementById('field-1')
+const field1 = document.getElementById('input-1')
 
 const cardLeft = document.getElementById('info-left')
 const cardCenter = document.getElementById('info-center')
@@ -27,9 +48,19 @@ const cardRight = document.getElementById('info-right')
 const textLeft = document.getElementById('text-left')
 const textRight = document.getElementById('text-right')
 
+// UTILS
+const writeText = () => {
+    if (encode) {
+        textRight.innerHTML = encoding[coding](params)
+    } else {
+        textRight.innerHTML = decoding[coding](params)
+    }
+}
+
 // LISTENERS
 alphaField.addEventListener('input', ({ target }) => {
-    alphabet = target.value
+    params[0] = target.value
+    writeText()
 })
 
 select.addEventListener('change', ({ target }) => {
@@ -45,20 +76,21 @@ select.addEventListener('change', ({ target }) => {
         cardRight.innerHTML = 'Decoded Text'
         cardCenter.innerHTML = text.replace('enc', 'dec')
     }
-})
-
-textLeft.addEventListener('input', ({ target }) => {
-    if (encode) {
-        textRight.innerHTML = encoding['caesar'](alphabet, target.value, 3)
-    } else {
-        textRight.innerHTML = decoding['caesar'](alphabet, target.value, 3)
-    }
+    writeText()
 })
 
 selectCoding.addEventListener('change', ({ target }) => {
-    // let text = cardCenter.innerHTML
-    console.log('value', target.value);
-    // let lastWord = text.substring(text.lastIndexOf(' '))
-    // cardCenter.innerHTML = `${target.value} ${lastWord}`
-    // console.log(cardCenter);
+    let text = cardCenter.innerHTML
+    cardCenter.innerHTML = `${coding = target.value} ${text.substring(text.lastIndexOf(' '))}`
+    writeText()
+})
+
+textLeft.addEventListener('input', ({ target }) => {
+    params[1] = target.value
+    writeText()
+})
+
+field1.addEventListener('input', ({ target }) => {
+    params[2] = target.value
+    writeText()
 })

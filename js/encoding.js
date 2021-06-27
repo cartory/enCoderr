@@ -24,10 +24,11 @@ const caesarEncode = (mi, message, moves = 0) => {
  * CryptoClassic - vigenere Encode
  * @param {string} mi, is alphabet
  * @param {string} message, text to be encoded
- * @param {string} key, key word to encoded 
+ * @param {string} key, key word to encode
  * @returns {string} encoded string
  */
 const vigenereEncode = (mi, message, key) => {
+    message = message.replaceAll(' ', '')
     let code = message.split('').map((letter, index) => {
         let a = mi.indexOf(letter)
         let b = index % key.length
@@ -35,5 +36,5 @@ const vigenereEncode = (mi, message, key) => {
         return a !== -1 ? mi[(a + b) % mi.length] : letter
     })
 
-    return code.join('')
+    return code.join('').match(/.{1,5}/g).join(' ')
 }

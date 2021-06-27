@@ -19,6 +19,20 @@ html, body {
     height: 100vh;
 }
 
+li {
+    display: flex;
+    padding: .1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: all .1s ease-in-out;
+}
+
+li:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 label {
     width: 15%;
     text-align: right;
@@ -38,13 +52,8 @@ select {
 
 a {
     color: white;
+    padding-left: .5rem;
     text-decoration: none;
-    transition: all .1s ease-in;
-}
-
-a:hover {
-    font-size: 110%;
-    color: var(--lightCyan);
 }
 
 strong {
@@ -80,7 +89,7 @@ strong {
 .main-content {
     position: relative;
     width: 100vw;
-    padding-top: 10%;
+    padding-top: 5%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -155,8 +164,17 @@ strong {
     justify-content: space-around;
 }
 
+.student-profile {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: all .1s ease-in-out;
+}
+
 .footer-students>* {
     list-style-type: none;
+    font-size: smaller;
 }
 
 @media only screen and (max-width: 450px) {

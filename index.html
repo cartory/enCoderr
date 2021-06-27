@@ -24,7 +24,10 @@
 </head>
 
 <body>
-
+    <!-- OST -->
+    <audio id="ost" loop autoplay>
+        <source id="ost-src" src="assets/tokyo.mp3" type="audio/mp3">
+    </audio>
     <header class="header">
         <div class="container" style="padding: .4rem;">
             <img src="assets/throwcode.png" alt="#">
@@ -136,6 +139,13 @@
     <script src="js/encoding.js"></script>
     <script src="js/decoding.js"></script>
     <script src="js/events.js"></script>
+    <script type="text/javascript">
+        let ost = document.getElementById('ost')
+        ost.volume = .2
+        ost.playbackRate = 1.1
+        ost.addEventListener('load', async _ => await ost.play())
+        document.addEventListener('click', async _ => await ost.play())
+    </script>
 </body>
 
 </html>

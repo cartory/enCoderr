@@ -11,15 +11,10 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/input.css">
     <link rel="stylesheet" href="css/github-corner.css">
-    <!-- GOOGLE FONTS -->
     <!-- ROBOTO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <!-- RUSSO ONE -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <!-- UBUNTU MONO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +25,7 @@
 
 <body>
     <header class="header">
-        <div class="container">
+        <div class="container" style="padding: 1rem;">
             <img src="assets/throwcode.png" alt="#">
             <h1 class="header-title">
                 en<strong>coderr</strong>
@@ -42,20 +37,36 @@
             <div class="card-head">
                 <p id="info-left" class="card-info">Text to Encode</p>
                 <select id="coder" class="select">
-                    <option class="select" selected value="encode">encode</option>
                     <option class="option" value="decode">decode</option>
+                    <option class="option" selected value="encode">encode</option>
                 </select>
             </div>
             <div class="card-body">
-                <textarea id="text-left" spellcheck="false" class="card-content" rows="10" cols="40"></textarea>
+                <textarea id="text-left" spellcheck="false" class="card-content" rows="10" cols="30"></textarea>
             </div>
         </div>
-        <div class="card">
+        <div class="card expand">
             <div class="card-head">
-                CARD HEADER
+                <p id="info-center" class="card-info">caesar encoding</p>
             </div>
             <div class="card-body">
-                <textarea spellcheck="false" class="card-content" rows="10" cols="40"></textarea>
+                <div class="container flex-col">
+                    <div class="container w-50">
+                        <select id="coding" class="select label">
+                            <option class="option" value="decode">vigenere</option>
+                            <option class="option" selected value="encode">caesar</option>
+                        </select>
+                    </div>
+                    <div class="container center p-bottom">
+                        <label>alphabet</label>
+                        <input type="text" id="alpha" class="field" placeholder="A...Z" spellcheck="false"
+                            value="abcdefghijklmnñopqrstuvwxyz">
+                    </div>
+                    <div class="container center p-bottom">
+                        <label id="label-1" for="coding">moves</label>
+                        <input id="input-1" spellcheck="false" class="field" type="text" placeholder="moves">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -63,8 +74,7 @@
                 <p id="info-right" class="card-info">Encoded Text</p>
             </div>
             <div class="card-body">
-                <textarea id="text-right" spellcheck="false" class="card-content" rows="10"
-                    cols="40"></textarea>
+                <textarea id="text-right" spellcheck="false" class="card-content" rows="10" cols="30"></textarea>
             </div>
         </div>
     </section>
@@ -72,19 +82,19 @@
         <h4 class="footer-title">Universidad Autónoma Gabriel René Moreno</h4>
         <ul class="footer-students">
             <li>
-                <a href="https://www.facebook.com/cartory.onfire" target="_blank">Caricari Torrejón Pedro Luis</a>
+                <a href="https://github.com/cartory" target="_blank">Caricari Torrejón Pedro Luis</a>
             </li>
             <li>
                 <a href="https://www.facebook.com/kharis.gamong" target="_blank">Gamon Barba Kjaris</a>
             </li>
             <li>
-                <a href="https://www.facebook.com/milenamollinedofranco" target="_blank">Mollinedo Franco Milena</a>
+                <a href="https://github.com/milemf99" target="_blank">Mollinedo Franco Milena</a>
             </li>
             <li>
                 <a href="https://www.facebook.com/melissa.sanchezcuellar" target="_blank">Sánchez Cuellar Melissa</a>
             </li>
             <li>
-                <a href="https://www.facebook.com/erickedwing.vidalcespedes" target="_blank">Vidal Céspedes Erick
+                <a href="https://github.com/Erick328" target="_blank">Vidal Céspedes Erick
                     Edwing</a>
             </li>
         </ul>
@@ -102,7 +112,8 @@
                 fill="#ffffff"></path>
         </svg>
     </a>
-
+    <script src="js/encoding.js"></script>
+    <script src="js/decoding.js"></script>
     <script src="js/events.js"></script>
 </body>
 

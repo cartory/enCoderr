@@ -5,7 +5,7 @@ let alphabet = 'abcdefghijklmnñopqrstuvwxyz'
 let params = [
     alphabet,       // ALPHABET
     '',             // MESSAGE TEXT
-    '0',            // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
+    '2',            // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
 ]
 
 const encoding = {
@@ -29,6 +29,11 @@ const decoding = {
     vigenere: ([alpha, text, key]) => {
         return text
     },
+}
+
+const labelCoding = {
+    caesar: 'moves',
+    vigenere: 'key',
 }
 
 // DOCUMENT ELEMENTS 
@@ -81,7 +86,8 @@ select.addEventListener('change', ({ target }) => {
 
 selectCoding.addEventListener('change', ({ target }) => {
     let text = cardCenter.innerHTML
-    cardCenter.innerHTML = `${coding = target.value} ${text.substring(text.lastIndexOf(' '))}`
+    label1.innerHTML = labelCoding[coding = target.value]
+    cardCenter.innerHTML = `${coding} ${text.substring(text.lastIndexOf(' '))}`
     writeText()
 })
 

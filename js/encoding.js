@@ -39,3 +39,36 @@ const vigenereEncode = (mi, message, key) => {
 
     return code.join('')
 }
+
+// TRANSPOSITION BY COLUMNS
+/**
+ * 
+ * @param {string} alphabet 
+ * @param {string} message 
+ * @param {string} key 
+ * @returns 
+ */
+
+const columnEncode = (alphabet, message, key) => {
+    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+
+    key = key.split('').filter((val, index) => index === key.indexOf(val))
+    
+    let sortKey = key.sort()
+    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+
+    for (let index = 0; index < rows.length; index++) {
+        let cols = message.substr(index * key.length, key.length).split('')
+        while (cols.length < key.length) cols.push('X')
+        rows[index] = cols
+    }
+
+    return sortKey
+        .map(letter => rows.map(row => row[key.indexOf(letter)]).join(''))
+        .join('')
+}
+
+let test = "cat"
+let alpha = 'abcdefghijklmnñopqrstuvwxyz'
+
+console.log('res => ', columnEncode(alpha, 'the sky is blue', 'cat'))

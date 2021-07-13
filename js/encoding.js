@@ -197,3 +197,34 @@ const seriesEncode = (message) => {
     order.forEach(pos => res += letters[pos])
     return [order, res]
 }
+
+/**
+ * Transpositions by Rows
+ * @param {string} alphabet 
+ * @param {string} message 
+ * @param {string} key 
+ * @returns 
+ */
+
+const rowEncode = (alphabet, message, key) => {
+    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+
+    key = key.split('').filter((val, index) => index === key.indexOf(val))
+
+    let sortKey = key.sort()
+    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+
+    for (let index = 0; index < rows.length; index++) {
+        let cols = message.substr(index * key.length, key.length).split('')
+        while (cols.length < key.length) cols.push('X')
+        rows[index] = cols
+    }
+
+    const matrix = Array(rows[0].length).fill(Array(rows).fill(0))
+    
+    rows.forEach((cols, i) => cols.forEach((val, j) => matrix[j][i] = val))
+
+    return sortKey
+        .map(letter => rows.map(row => row[key.indexOf(letter)]).join(''))
+        .join('')
+}

@@ -2,6 +2,7 @@
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const alphaCrypt = 'qwertyuiopasdfghjklzxcvbnm'
 
+let matrix = []
 let series = [[], '', '']
 let encode = true
 let coding = 'caesar'
@@ -20,23 +21,37 @@ const encoding = {
         if (!moves || moves < 1) return 'Syntax Error'
         return caesarEncode(alpha, text, moves)
     },
+
     vigenere: ([alpha, text, key]) => {
         if (key.length < 1) return 'Empty Key'
         return vigenereEncode(alpha, text, key)
     },
+
     zigzag: ([_, text, cols]) => {
         cols = Number.parseInt(cols)
         if (!cols || cols < 1) return 'Syntax Error'
         return zigzagEncode(text, cols)
     },
+
     mono: ([_, text]) => {
         return monoEncode(text.toLowerCase())
     },
+
     series: ([_, text]) => {
         let [order, code] = seriesEncode(text)
         series = [order, text, code]
         return code
-    }
+    },
+
+    col: ([alpha, text, key]) => {
+        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        return columnEncode(alpha, text, key)
+    },
+
+    row: ([alpha, text, key]) => {
+        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        return rowEncode(alpha, text, key)
+    },
 }
 
 const decoding = {
@@ -63,7 +78,16 @@ const decoding = {
         }
 
         return monoDecode(text)
-    }
+    },
+    col: ([alpha, text, key]) => {
+        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        return columnDecode(alpha, text, key)
+    },
+
+    row: ([alpha, text, key]) => {
+        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        return rowDecode(alpha, text, key)
+    },
 }
 
 const labelCoding = {
@@ -73,6 +97,8 @@ const labelCoding = {
     zigzag: 'cols',
     caesar: 'moves',
     vigenere: 'key',
+    col: 'key',
+    row: 'key',
 }
 
 // DOCUMENT ELEMENTS 

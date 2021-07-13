@@ -1,3 +1,17 @@
+// UTILS
+const splitLength = (chars, number) => {
+    let res = []
+
+    let i = 0
+
+    while (i < chars.length) {
+        res.push(chars.substr(i, number))
+        i += number
+    }
+
+    return res
+}
+
 /**
  * CryptoClassic - Caesar Encode
  * @param {string} mi is Alphabet
@@ -106,4 +120,60 @@ const seriesDecode = ([order, code]) => {
     let message = Array(code.length)
     order.forEach(pos => message[pos] = code[pos])
     return message.join('')
+}
+
+/**
+ * Transpositions by Columns
+ * @param {string} alphabet
+ * @param {string} message
+ * @param {string} key
+ * @returns
+ */
+
+const columnDecode = (alphabet, message, key) => {
+    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+    key = key.split('').filter((val, index) => index === key.indexOf(val))
+
+    let sortKey = key.sort()
+    console.log(sortKey);
+    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+
+    let splits = splitLength(message, rows.length)
+
+    let res = ''
+
+
+    // sortKey.forEach((letter, index) => {
+    //     let pos = alphabet.indexOf(letter)
+    //     res += splits.map(split => split[])
+    // })
+    for (let i = 0; i < rows.length; i++) {
+        res += splits.map(split => split[i]).join('')
+    }
+    return res
+}
+
+/**
+ * Transpositions by Columns
+ * @param {string} alphabet
+ * @param {string} message
+ * @param {string} key
+ * @returns
+ */
+
+const rowDecode = (alphabet, message, key) => {
+    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+    key = key.split('').filter((val, index) => index === key.indexOf(val))
+
+    let sortKey = key.sort()
+
+    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+
+    let splits = splitLength(message, rows.length)
+
+    let res = ''
+    for (let i = 0; i < rows.length; i++) {
+        res += splits.map(split => split[i]).join('')
+    }
+    return res
 }

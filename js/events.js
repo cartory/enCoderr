@@ -2,6 +2,7 @@
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const alphaCrypt = 'qwertyuiopasdfghjklzxcvbnm'
 
+let series = [[], '']
 let encode = true
 let coding = 'caesar'
 let params = [
@@ -31,6 +32,11 @@ const encoding = {
     mono: ([_, text]) => {
         return monoEncode(text.toLowerCase())
     },
+    series: ([_, text]) => {
+        let [order, code] = seriesEncode(text)
+        series = [order, text]
+        return code
+    }
 }
 
 const decoding = {
@@ -50,13 +56,19 @@ const decoding = {
     },
     mono: ([_, text]) => {
         return monoDecode(text)
+    },
+    series: ([_, text]) => {
+        return seriesDecode(series)
     }
 }
 
 const labelCoding = {
+    mono: '🚫‼️',
+    series: '🚫‼️',
+
+    zigzag: 'cols',
     caesar: 'moves',
     vigenere: 'key',
-    zigzag: 'cols',
 }
 
 // DOCUMENT ELEMENTS 

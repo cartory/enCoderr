@@ -1,6 +1,13 @@
 // UTILS
-const getCi = (mi, moves = 0) => {
-    return mi.substring(moves, mi.length) + mi.substring(0, moves)
+const isEven = (num) => num % 2 === 0
+
+const isPrime = (num) => {
+    let sqrtNum = Math.floor(Math.sqrt(num))
+    while (sqrtNum > 1) {
+        if (num % sqrtNum-- === 0) return false
+    }
+
+    return true && num > 1
 }
 
 const buildColumns = (string, nroColumns) => {
@@ -12,6 +19,7 @@ const buildColumns = (string, nroColumns) => {
 
     return arrayString
 }
+const getCi = (mi, moves = 0) => mi.substring(moves, mi.length) + mi.substring(0, moves)
 
 const iterateArrayStringDiagonally = (arrayString, callback) => {
     let width = arrayString[0].length
@@ -155,4 +163,37 @@ const monoEncode = (s) => {
     }
 
     return res
+}
+
+/**
+ * Series Encoding
+ * @param {string} message
+ * @returns
+ */
+
+const seriesEncode = (message) => {
+    let res = ""
+    let order = []
+    let letters = message.split('')
+
+    letters.forEach((_, index) => {
+        if (isPrime(index + 1)) {
+            order.push(index)
+        }
+    })
+
+    letters.forEach((_, index) => {
+        if (!order.includes(index) && isEven(index + 1)) {
+            order.push(index)
+        }
+    })
+
+    letters.forEach((_, index) => {
+        if (!order.includes(index)) {
+            order.push(index)
+        }
+    })
+
+    order.forEach(pos => res += letters[pos])
+    return [order, res]
 }

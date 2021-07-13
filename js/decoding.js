@@ -63,10 +63,8 @@ const zigzagDecode = (string, nroColumns) => {
 
 /**
  * monoAlphabetic decoding 
- * 
  * @param {string} s 
  * @returns {string}
- * 
  */
 
 const monoDecode = (s) => {
@@ -95,4 +93,17 @@ const monoDecode = (s) => {
     }
 
     return res
+}
+
+/**
+ * Series Decoding
+ * @param {number[]} order
+ * @param {string} code
+ * @returns {string}
+ */
+
+const seriesDecode = ([order, code]) => {
+    let message = Array(code.length)
+    order.forEach(pos => message[pos] = code[pos])
+    return message.join('')
 }

@@ -59,3 +59,40 @@ const zigzagDecode = (string, nroColumns) => {
     iterateArrayStringDiagonally(arrayString, (x, y, val) => re += val)
     return re
 }
+
+
+/**
+ * monoAlphabetic decoding 
+ * 
+ * @param {string} s 
+ * @returns {string}
+ * 
+ */
+
+const monoDecode = (s) => {
+    let res = ''
+
+    for (let i = 0; i < s.length; i++) {
+        const letter = s[i];
+
+        let next = false
+
+        for (let j = 0; j < alphaCrypt.length; j++) {
+            const char = alphaCrypt[j];
+            if (letter === char) {
+                res += alpha[j]
+                break;
+            }
+
+            next = !alpha.includes(letter)
+            if (next) {
+                res += letter
+                break;
+            }
+        }
+
+        if (next) continue
+    }
+
+    return res
+}

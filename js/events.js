@@ -1,4 +1,7 @@
 // CONSTANTS
+const alpha = 'abcdefghijklmnopqrstuvwxyz'
+const alphaCrypt = 'qwertyuiopasdfghjklzxcvbnm'
+
 let encode = true
 let coding = 'caesar'
 let params = [
@@ -24,7 +27,10 @@ const encoding = {
         cols = Number.parseInt(cols)
         if (!cols || cols < 1) return 'Syntax Error'
         return zigzagEncode(text, cols)
-    }
+    },
+    mono: ([_, text]) => {
+        return monoEncode(text.toLowerCase())
+    },
 }
 
 const decoding = {
@@ -41,6 +47,9 @@ const decoding = {
         cols = Number.parseInt(cols)
         if (!cols || cols < 1) return 'Syntax Error'
         return zigzagDecode(text, cols)
+    },
+    mono: ([_, text]) => {
+        return monoDecode(text)
     }
 }
 

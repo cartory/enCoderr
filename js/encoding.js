@@ -120,3 +120,39 @@ const zigzagEncode = (string, nroColumns) => {
     iterateArrayStringValues(arrayString, (x, y, val) => re += val)
     return re
 }
+
+/**
+ * monoAlphabetic encoding
+ * @param {string} s 
+ * @returns {string}
+ * 
+ */
+const monoEncode = (s) => {
+    let res = ''
+
+
+    for (let i = 0; i < s.length; i++) {
+        const letter = s[i];
+
+        let next = false
+
+        for (let j = 0; j < alpha.length; j++) {
+            const char = alpha[j];
+
+            if (letter === char) {
+                res += alphaCrypt[j]
+                break;
+            }
+
+            next = !alpha.includes(letter)
+            if (next) {
+                res += letter
+                break;
+            }
+        }
+
+        if (next) continue
+    }
+
+    return res
+}

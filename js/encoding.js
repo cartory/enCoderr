@@ -1,7 +1,45 @@
+// UTILS
 const getCi = (mi, moves = 0) => {
     return mi.substring(moves, mi.length) + mi.substring(0, moves)
 }
 
+const buildColumns = (string, nroColumns) => {
+    let cycle = nroColumns * 2 - 2
+    let width = Math.floor(string.length / cycle) * cycle + string.length % cycle
+
+    let arrayString = []
+    while (nroColumns-- > 0) arrayString.push(Array(width))
+
+    return arrayString
+}
+
+const iterateArrayStringDiagonally = (arrayString, callback) => {
+    let width = arrayString[0].length
+    let height = arrayString.length
+
+    let x = 0, y = 0, yDir
+
+    while (x++ < width) {
+        callback(x, y, arrayString[y][x])
+
+        if (!yDir) {
+            yDir = 1
+        } else if (y === 0 || y === height - 1) {
+            yDir = -yDir
+        }
+        y += yDir
+    }
+}
+
+const iterateArrayStringValues = (arrayString, callback) => {
+    for (let y = 0; y < arrayString.length; y++) {
+        for (let x = 0; x < arrayString[y].length; x++) {
+            if (arrayString[y][x] !== undefined) callback(x, y, arrayString[y][x])
+        }
+    }
+}
+
+/// ENCODERS
 /**
  * CryptoClassic - Caesar Encode
  * @param {string} mi is Alphabet
@@ -40,9 +78,8 @@ const vigenereEncode = (mi, message, key) => {
     return code.join('')
 }
 
-// TRANSPOSITION BY COLUMNS
 /**
- * 
+ * Transpositions by Columns
  * @param {string} alphabet 
  * @param {string} message 
  * @param {string} key 
@@ -53,7 +90,7 @@ const columnEncode = (alphabet, message, key) => {
     message = message.split('').filter(letter => alphabet.includes(letter)).join('')
 
     key = key.split('').filter((val, index) => index === key.indexOf(val))
-    
+
     let sortKey = key.sort()
     let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
 
@@ -68,7 +105,18 @@ const columnEncode = (alphabet, message, key) => {
         .join('')
 }
 
-let test = "cat"
-let alpha = 'abcdefghijklmnñopqrstuvwxyz'
+/**
+ * Zizag encoding
+ * @param {string} string
+ * @param {number} nroColumns 
+ * @returns {string}
+ */
+const zigzagEncode = (string, nroColumns) => {
+    const arrayString = buildColumns(string, nroColumns)
+    const strArray = Array.from(string)
+    iterateArrayStringDiagonally(arrayString, (x, y) => arrayString[y][x] = strArray.shift())
 
-console.log('res => ', columnEncode(alpha, 'the sky is blue', 'cat'))
+    let re = ''
+    iterateArrayStringValues(arrayString, (x, y, val) => re += val)
+    return re
+}

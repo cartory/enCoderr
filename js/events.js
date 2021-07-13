@@ -13,13 +13,18 @@ let params = [
 const encoding = {
     caesar: ([alpha, text, moves]) => {
         moves = Number.parseInt(moves)
-        if (!moves && moves !== 0) return 'Syntax Error'
+        if (!moves || moves < 1) return 'Syntax Error'
         return caesarEncode(alpha, text, moves)
     },
     vigenere: ([alpha, text, key]) => {
         if (key.length < 1) return 'Empty Key'
         return vigenereEncode(alpha, text, key)
     },
+    zigzag: ([_, text, cols]) => {
+        cols = Number.parseInt(cols)
+        if (!cols || cols < 1) return 'Syntax Error'
+        return zigzagEncode(text, cols)
+    }
 }
 
 const decoding = {
@@ -32,11 +37,17 @@ const decoding = {
         if (key.length < 1) return 'Empty Key'
         return vigenereDecode(alpha, text, key)
     },
+    zigzag: ([_, text, cols]) => {
+        cols = Number.parseInt(cols)
+        if (!cols || cols < 1) return 'Syntax Error'
+        return zigzagDecode(text, cols)
+    }
 }
 
 const labelCoding = {
     caesar: 'moves',
     vigenere: 'key',
+    zigzag: 'cols',
 }
 
 // DOCUMENT ELEMENTS 

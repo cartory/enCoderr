@@ -39,3 +39,23 @@ const vigenereDecode = (mi, code, key) => {
 
     return message.join('')
 }
+
+/**
+ * ZigZag decoder
+ * @param {string} string 
+ * @param {number} nroColumns 
+ * @returns {string}
+ */
+
+const zigzagDecode = (string, nroColumns) => {
+    const arrayString = buildColumns(string, nroColumns)
+
+    iterateArrayStringDiagonally(arrayString, (x, y) => arrayString[y][x] = '-')
+
+    const strArray = Array.from(string)
+    iterateArrayStringValues(arrayString, (x, y) => arrayString[y][x] = strArray.shift())
+
+    let re = ''
+    iterateArrayStringDiagonally(arrayString, (x, y, val) => re += val)
+    return re
+}

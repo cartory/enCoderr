@@ -2,9 +2,12 @@
 let encode = true
 let coding = 'caesar'
 let params = [
-    'abcdefghijklmnñopqrstuvwxyz',       // ALPHABET
-    '',             // MESSAGE TEXT
-    '2',            // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
+    // ALPHABET
+    'abcdefghijklmnñopqrstuvwxyz',
+    // MESSAGE TEXT
+    '',
+    // FIRST PARAM ACCORDING METHOD ENCODING/ DECODING
+    '2',
 ]
 
 const encoding = {

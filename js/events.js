@@ -2,7 +2,7 @@
 const alpha = 'abcdefghijklmnopqrstuvwxyz'
 const alphaCrypt = 'qwertyuiopasdfghjklzxcvbnm'
 
-let series = [[], '']
+let series = [[], '', '']
 let encode = true
 let coding = 'caesar'
 let params = [
@@ -34,7 +34,7 @@ const encoding = {
     },
     series: ([_, text]) => {
         let [order, code] = seriesEncode(text)
-        series = [order, text]
+        series = [order, text, code]
         return code
     }
 }
@@ -58,7 +58,11 @@ const decoding = {
         return monoDecode(text)
     },
     series: ([_, text]) => {
-        return seriesDecode(series)
+        if (text === series[2]) {
+            return seriesDecode(series)
+        }
+
+        return monoDecode(text)
     }
 }
 

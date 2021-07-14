@@ -47,6 +47,24 @@ const iterateArrayStringValues = (arrayString, callback) => {
     }
 }
 
+const splitStringbyLength = (string, length) => {
+    let i = 0, res = []
+
+    while (i < string.length) {
+        res.push(string.substr(i, length))
+        i += length
+    }
+
+    let last = res.pop()
+
+    while (last.length < length) {
+        last += 'x'
+    }
+
+    return [...res, last]
+}
+
+
 /// ENCODERS
 /**
  * CryptoClassic - Caesar Encode
@@ -91,27 +109,30 @@ const vigenereEncode = (mi, message, key) => {
  * @param {string} alphabet 
  * @param {string} message 
  * @param {string} key 
- * @returns 
+ * @returns {string}
  */
+const columnEncode = (alpha, text, key) => {
+    // removing not alpha chars 
+    text = text.split('').filter(letter => alpha.includes(letter)).join('')
 
-const columnEncode = (alphabet, message, key) => {
-    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+    let sortKey = key.split('').sort()
 
-    key = key.split('').filter((val, index) => index === key.indexOf(val))
+    // enumerating the key order e.g cat => act
+    sortKey = key.split('').map((letter) => {
+        let pos = sortKey.indexOf(letter)
+        sortKey[pos] = null
+        return pos
+    })
 
-    let sortKey = key.sort()
-    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+    // calculating matrix
+    let matrix = splitStringbyLength(text, key.length)
 
-    for (let index = 0; index < rows.length; index++) {
-        let cols = message.substr(index * key.length, key.length).split('')
-        while (cols.length < key.length) cols.push('X')
-        rows[index] = cols
-    }
-
+    // reading matrix according key
     return sortKey
-        .map(letter => rows.map(row => row[key.indexOf(letter)]).join(''))
+        .map(pos => matrix.map(word => word.charAt(pos)).join(''))
         .join('')
 }
+
 
 /**
  * Zizag encoding
@@ -221,7 +242,7 @@ const rowEncode = (alphabet, message, key) => {
     }
 
     const matrix = Array(rows[0].length).fill(Array(rows).fill(0))
-    
+
     rows.forEach((cols, i) => cols.forEach((val, j) => matrix[j][i] = val))
 
     return sortKey

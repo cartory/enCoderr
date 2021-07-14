@@ -1,8 +1,6 @@
 // UTILS
 const splitLength = (chars, number) => {
-    let res = []
-
-    let i = 0
+    let i = 0, res = []
 
     while (i < chars.length) {
         res.push(chars.substr(i, number))
@@ -124,32 +122,31 @@ const seriesDecode = ([order, code]) => {
 
 /**
  * Transpositions by Columns
- * @param {string} alphabet
+ * @param {string} alpha
  * @param {string} message
  * @param {string} key
- * @returns
+ * @returns {string}
  */
+const columnDecode = (alpha, text, key) => {
+    text = text.split('').filter(letter => alpha.includes(letter)).join('')
 
-const columnDecode = (alphabet, message, key) => {
-    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
-    key = key.split('').filter((val, index) => index === key.indexOf(val))
+    let sortKey = key.split('').sort()
 
-    let sortKey = key.sort()
-    console.log(sortKey);
-    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+    // enumerating the key order e.g cat => act
+    sortKey = key.split('').map((letter) => {
+        let pos = sortKey.indexOf(letter)
+        sortKey[pos] = null
+        return pos
+    })
 
-    let splits = splitLength(message, rows.length)
+    let rows = Math.trunc((text.length + key.length - 1) / key.length)
+    let cols = splitStringbyLength(text, rows)
 
     let res = ''
-
-
-    // sortKey.forEach((letter, index) => {
-    //     let pos = alphabet.indexOf(letter)
-    //     res += splits.map(split => split[])
-    // })
-    for (let i = 0; i < rows.length; i++) {
-        res += splits.map(split => split[i]).join('')
+    for (let i = 0; i < rows; i++) {
+        res += sortKey.map(pos => cols[pos].charAt(i)).join('')
     }
+
     return res
 }
 

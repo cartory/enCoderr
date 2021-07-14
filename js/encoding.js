@@ -64,6 +64,22 @@ const splitStringbyLength = (string, length) => {
     return [...res, last]
 }
 
+/**
+ * enumerating the key order e.g cat => act
+ * @param {string} string 
+ */
+const getOrderIndexAlpha = (key) => {
+    let sortKey = key.split('').sort()
+
+    return key
+        .split('')
+        .map((letter) => {
+            let pos = sortKey.indexOf(letter)
+            sortKey[pos] = null
+            return pos
+        })
+
+}
 
 /// ENCODERS
 /**
@@ -111,18 +127,9 @@ const vigenereEncode = (mi, message, key) => {
  * @param {string} key 
  * @returns {string}
  */
-const columnEncode = (alpha, text, key) => {
-    // removing not alpha chars 
-    text = text.split('').filter(letter => alpha.includes(letter)).join('')
-
-    let sortKey = key.split('').sort()
-
+const columnEncode = (text, key) => {
     // enumerating the key order e.g cat => act
-    sortKey = key.split('').map((letter) => {
-        let pos = sortKey.indexOf(letter)
-        sortKey[pos] = null
-        return pos
-    })
+    let sortKey = getOrderIndexAlpha(key)
 
     // calculating matrix
     let matrix = splitStringbyLength(text, key.length)
@@ -219,31 +226,27 @@ const seriesEncode = (message) => {
 
 /**
  * Transpositions by Rows
- * @param {string} alphabet 
- * @param {string} message 
+ * @param {string} alpha 
+ * @param {string} text 
  * @param {string} key 
- * @returns 
+ * @returns {string}
  */
 
-const rowEncode = (alphabet, message, key) => {
-    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
+const rowEncode = (text, key) => {
+    // enumerating the key order e.g cat => act
+    let sortKey = getOrderIndexAlpha(key)
+    let cols = splitStringbyLength(text, key.length)
 
-    key = key.split('').filter((val, index) => index === key.indexOf(val))
+    // console.log({
+    //     text, key, sortKey, cols
+    // });
 
-    let sortKey = key.sort()
-    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
+    let res = Array(key.length)
 
-    for (let index = 0; index < rows.length; index++) {
-        let cols = message.substr(index * key.length, key.length).split('')
-        while (cols.length < key.length) cols.push('X')
-        rows[index] = cols
-    }
+    sortKey.forEach((pos, index) => {
+        res[pos] = cols.map(word => word[index]).join('')
+        console.log(res);
+    })
 
-    const matrix = Array(rows[0].length).fill(Array(rows).fill(0))
-
-    rows.forEach((cols, i) => cols.forEach((val, j) => matrix[j][i] = val))
-
-    return sortKey
-        .map(letter => rows.map(row => row[key.indexOf(letter)]).join(''))
-        .join('')
+    return res.join('')
 }

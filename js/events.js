@@ -43,12 +43,12 @@ const encoding = {
 
     col: ([alpha, text, key]) => {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
-        return columnEncode(alpha, text, key)
+        return columnEncode(text, key)
     },
 
     row: ([alpha, text, key]) => {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
-        return rowEncode(alpha, text, key)
+        return rowEncode(text.toLowerCase(), key)
     },
 
     colNum: ([_, text, key]) => {
@@ -86,12 +86,12 @@ const decoding = {
     },
     col: ([alpha, text, key]) => {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
-        return columnDecode(alpha, text, key)
+        return columnDecode(text, key)
     },
 
     row: ([alpha, text, key]) => {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
-        return rowDecode(alpha, text, key)
+        return rowDecode(text.toLowerCase(), key)
     },
 
     colNum: ([_, text, key]) => {

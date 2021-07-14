@@ -127,9 +127,7 @@ const seriesDecode = ([order, code]) => {
  * @param {string} key
  * @returns {string}
  */
-const columnDecode = (alpha, text, key) => {
-    text = text.split('').filter(letter => alpha.includes(letter)).join('')
-
+const columnDecode = (text, key) => {
     let sortKey = key.split('').sort()
 
     // enumerating the key order e.g cat => act
@@ -151,26 +149,26 @@ const columnDecode = (alpha, text, key) => {
 }
 
 /**
- * Transpositions by Columns
- * @param {string} alphabet
- * @param {string} message
- * @param {string} key
- * @returns
+ * Transpositions by Rows
+ * @param {string} alpha 
+ * @param {string} text 
+ * @param {string} key 
+ * @returns {string}
  */
 
-const rowDecode = (alphabet, message, key) => {
-    message = message.split('').filter(letter => alphabet.includes(letter)).join('')
-    key = key.split('').filter((val, index) => index === key.indexOf(val))
+const rowDecode = (text, key) => {
+    // enumerating the key order e.g cat => act
+    let sortKey = getOrderIndexAlpha(key)
 
-    let sortKey = key.sort()
+    let rowCount = Math.trunc((text.length + key.length - 1) / key.length)
 
-    let rows = Array(Number.parseInt((message.length + key.length - 1) / key.length))
-
-    let splits = splitLength(message, rows.length)
+    let rows = splitStringbyLength(text, rowCount)
 
     let res = ''
-    for (let i = 0; i < rows.length; i++) {
-        res += splits.map(split => split[i]).join('')
+
+    for (let i = 0; i < rowCount; i++) {
+        res += sortKey.map(pos => rows[pos].charAt(i)).join('')
     }
+
     return res
 }

@@ -1,7 +1,4 @@
 // CONSTANTS
-const alpha = 'abcdefghijklmnopqrstuvwxyz'
-const alphaCrypt = 'qwertyuiopasdfghjklzxcvbnm'
-
 let matrix = []
 let series = [[], '', '']
 let encode = true
@@ -33,8 +30,9 @@ const encoding = {
         return zigzagEncode(text, cols)
     },
 
-    mono: ([_, text]) => {
-        return monoEncode(text.toLowerCase())
+    mono: ([alpha, text, alphaCrypt]) => {
+        if (alpha.length !== alphaCrypt.length) return "Alphas don't Match"
+        return monoEncode(alpha, text.toLowerCase(), alphaCrypt)
     },
 
     series: ([_, text]) => {
@@ -75,8 +73,9 @@ const decoding = {
         if (!cols || cols < 1) return 'Syntax Error'
         return zigzagDecode(text, cols)
     },
-    mono: ([_, text]) => {
-        return monoDecode(text)
+    mono: ([alpha, text, alphaCrypt = alpha2]) => {
+        if (alpha.length !== alphaCrypt.length) return "Alphas don't Match"
+        return monoDecode(alpha, text.toLowerCase(), alphaCrypt)
     },
     series: ([_, text]) => {
         if (text === series[2]) {
@@ -103,15 +102,15 @@ const decoding = {
 }
 
 const labelCoding = {
-    mono: '🚫‼️',
+    mono: '🔐 alpha',
     series: '🚫‼️',
 
-    zigzag: 'cols',
-    caesar: 'moves',
-    vigenere: 'key',
-    col: 'key',
-    row: 'key',
-    colNum: 'cols',
+    zigzag: '🧱 cols',
+    caesar: '📐 moves',
+    vigenere: '🔑 key',
+    col: '🔑 key',
+    row: '🔑  key',
+    colNum: '🔑 keyNum',
 }
 
 // DOCUMENT ELEMENTS 
@@ -165,6 +164,9 @@ select.addEventListener('change', ({ target }) => {
 selectCoding.addEventListener('change', ({ target }) => {
     let text = cardCenter.innerHTML
     label1.innerHTML = labelCoding[coding = target.value]
+
+    params[2] = field1.value = coding === 'mono' ? 'qwertyuiopasdfghjklñzxcvbnm' : ''
+
     cardCenter.innerHTML = `${coding} ${text.substring(text.lastIndexOf(' '))}`
     writeText()
 })

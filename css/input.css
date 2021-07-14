@@ -57,6 +57,10 @@ select::-ms-expand {
     margin: 1rem !important;
 }
 
+label {
+    cursor: pointer;
+}
+
 input {
     border: none;
     margin: 0;

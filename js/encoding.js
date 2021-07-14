@@ -154,11 +154,9 @@ const zigzagEncode = (string, nroColumns) => {
  * monoAlphabetic encoding
  * @param {string} s 
  * @returns {string}
- * 
  */
-const monoEncode = (s) => {
+const monoEncode = (alpha, s, alphaCrypt) => {
     let res = ''
-
 
     for (let i = 0; i < s.length; i++) {
         const letter = s[i];
@@ -189,7 +187,7 @@ const monoEncode = (s) => {
 /**
  * Series Encoding
  * @param {string} message
- * @returns
+ * @returns {string}
  */
 
 const seriesEncode = (message) => {

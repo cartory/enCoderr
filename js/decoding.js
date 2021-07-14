@@ -79,7 +79,7 @@ const zigzagDecode = (string, nroColumns) => {
  * @returns {string}
  */
 
-const monoDecode = (s) => {
+const monoDecode = (alpha, s, alphaCrypt) => {
     let res = ''
 
     for (let i = 0; i < s.length; i++) {

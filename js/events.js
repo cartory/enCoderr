@@ -52,6 +52,12 @@ const encoding = {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
         return rowEncode(alpha, text, key)
     },
+
+    colNum: ([_, text, key]) => {
+        key = Number.parseInt(key)
+        if (!key || key < 1) return 'Syntax Error'
+        return vlada.cipherText(text, key)
+    }
 }
 
 const decoding = {
@@ -88,6 +94,12 @@ const decoding = {
         if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
         return rowDecode(alpha, text, key)
     },
+
+    colNum: ([_, text, key]) => {
+        key = Number.parseInt(key)
+        if (!key || key < 1) return 'Syntax Error'
+        return vlada.decrypyText(text, key)
+    }
 }
 
 const labelCoding = {
@@ -99,6 +111,7 @@ const labelCoding = {
     vigenere: 'key',
     col: 'key',
     row: 'key',
+    colNum: 'cols',
 }
 
 // DOCUMENT ELEMENTS 

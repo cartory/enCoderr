@@ -15,45 +15,45 @@ let params = [
 const encoding = {
     caesar: ([alpha, text, moves]) => {
         moves = Number.parseInt(moves)
-        if (!moves || moves < 1) return 'Syntax Error'
+        if (!moves || moves < 1) return 'Number Required'
         return caesarEncode(alpha, text, moves)
     },
 
     vigenere: ([alpha, text, key]) => {
-        if (key.length < 1) return 'Empty Key'
+        if (key.length < 1) return 'Alpha String Required'
         return vigenereEncode(alpha, text, key)
     },
 
     zigzag: ([_, text, cols]) => {
         cols = Number.parseInt(cols)
-        if (!cols || cols < 1) return 'Syntax Error'
+        if (!cols || cols < 1) return 'Number Required'
         return zigzagEncode(text, cols)
     },
 
     mono: ([alpha, text, alphaCrypt]) => {
-        if (alpha.length !== alphaCrypt.length) return "Alphas don't Match"
+        if (alpha.length !== alphaCrypt.length) return "Alpha(s) don't Match"
         return monoEncode(alpha, text.toLowerCase(), alphaCrypt)
     },
 
     series: ([_, text]) => {
-        let [order, code] = seriesEncode(text)
-        series = [order, text, code]
+        let { arrayIndex, code } = seriesEncode(text)
+        sessionStorage.setItem('series', JSON.stringify(arrayIndex))
         return code
     },
 
     col: ([alpha, text, key]) => {
-        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        if (key.length < 1) return 'Alpha String Required'
         return columnEncode(text, key)
     },
 
     row: ([alpha, text, key]) => {
-        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        if (key.length < 1) return 'Alpha String Required'
         return rowEncode(text.toLowerCase(), key)
     },
 
     colNum: ([_, text, key]) => {
         key = Number.parseInt(key)
-        if (!key || key < 1) return 'Syntax Error'
+        if (!key || key < 1) return 'Number Required'
         return vlada.cipherText(text, key)
     }
 }
@@ -61,42 +61,40 @@ const encoding = {
 const decoding = {
     caesar: ([alpha, text, moves]) => {
         moves = Number.parseInt(moves)
-        if (!moves && moves !== 0) return 'Syntax Error'
+        if (!moves && moves !== 0) return 'Number Required'
         return caesarDecode(alpha, text, moves)
     },
     vigenere: ([alpha, text, key]) => {
-        if (key.length < 1) return 'Empty Key'
+        if (key.length < 1) return 'Alpha String Required'
         return vigenereDecode(alpha, text, key)
     },
     zigzag: ([_, text, cols]) => {
         cols = Number.parseInt(cols)
-        if (!cols || cols < 1) return 'Syntax Error'
+        if (!cols || cols < 1) return 'Number Required'
         return zigzagDecode(text, cols)
     },
     mono: ([alpha, text, alphaCrypt = alpha2]) => {
-        if (alpha.length !== alphaCrypt.length) return "Alphas don't Match"
+        if (alpha.length !== alphaCrypt.length) return "Alpha(s) don't Match"
         return monoDecode(alpha, text.toLowerCase(), alphaCrypt)
     },
     series: ([_, text]) => {
-        if (text === series[2]) {
-            return seriesDecode(series)
-        }
-
-        return monoDecode(text)
+        let arrayIndex = sessionStorage.getItem('series')
+        if (!arrayIndex) return 'Needing encode First For Matching'
+        return seriesDecode(text, JSON.parse(arrayIndex))
     },
     col: ([alpha, text, key]) => {
-        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        if (key.length < 1 || alpha.length < 1) return 'Alpha String Required'
         return columnDecode(text, key)
     },
 
     row: ([alpha, text, key]) => {
-        if (key.length < 1 || alpha.length < 1) return 'Param(s) Required'
+        if (key.length < 1 || alpha.length < 1) return 'Alpha String Required'
         return rowDecode(text.toLowerCase(), key)
     },
 
     colNum: ([_, text, key]) => {
         key = Number.parseInt(key)
-        if (!key || key < 1) return 'Syntax Error'
+        if (!key || key < 1) return 'Number Required'
         return vlada.decrypyText(text, key)
     }
 }

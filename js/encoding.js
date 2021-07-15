@@ -197,31 +197,29 @@ const monoEncode = (alpha, s, alphaCrypt) => {
  * @returns {string}
  */
 
-const seriesEncode = (message) => {
-    let res = ""
-    let order = []
-    let letters = message.split('')
+const seriesEncode = (text) => {
+    let m1 = [], m2 = [], m3 = [], left = []
 
-    letters.forEach((_, index) => {
-        if (isPrime(index + 1)) {
-            order.push(index)
+    text.split('').forEach((_, index) => {
+        if (index % 4 === 0) {
+            m1.push(index)
+        } else if (isPrime(index)) {
+            m2.push(index)
+        } else if (index % 2 === 0) {
+            m3.push(index)
+        } else {
+            left.push(index)
         }
     })
 
-    letters.forEach((_, index) => {
-        if (!order.includes(index) && isEven(index + 1)) {
-            order.push(index)
-        }
-    })
+    let arrayIndex = [m1, m2, m3, left]
 
-    letters.forEach((_, index) => {
-        if (!order.includes(index)) {
-            order.push(index)
-        }
-    })
-
-    order.forEach(pos => res += letters[pos])
-    return [order, res]
+    return {
+        arrayIndex,
+        code: arrayIndex
+            .map(arr => arr.map(index => text[index]).join(''))
+            .join('')
+    }
 }
 
 /**
@@ -236,10 +234,6 @@ const rowEncode = (text, key) => {
     // enumerating the key order e.g cat => act
     let sortKey = getOrderIndexAlpha(key)
     let cols = splitStringbyLength(text, key.length)
-
-    // console.log({
-    //     text, key, sortKey, cols
-    // });
 
     let res = Array(key.length)
 

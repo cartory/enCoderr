@@ -109,24 +109,26 @@ const monoDecode = (alpha, s, alphaCrypt) => {
 
 /**
  * Series Decoding
- * @param {number[]} order
- * @param {string} code
- * @returns {string}
+ * @param {string} text 
+ * @param {number[][]} arrayIndex 
  */
 
-const seriesDecode = ([order, code]) => {
-    let message = Array(code.length)
-    order.forEach(pos => message[pos] = code[pos])
-    return message.join('')
+const seriesDecode = (text, arrayIndex) => {
+    let arr = []
+    arrayIndex.forEach(pos => arr.push(...pos))
+
+    return arr
+        .map((_, index) => text[arr.indexOf(index)])
+        .join('')
 }
 
 /**
  * Transpositions by Columns
- * @param {string} alpha
  * @param {string} message
  * @param {string} key
  * @returns {string}
  */
+
 const columnDecode = (text, key) => {
     let sortKey = key.split('').sort()
 
@@ -150,7 +152,6 @@ const columnDecode = (text, key) => {
 
 /**
  * Transpositions by Rows
- * @param {string} alpha 
  * @param {string} text 
  * @param {string} key 
  * @returns {string}

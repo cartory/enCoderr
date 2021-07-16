@@ -95,8 +95,9 @@ strong {
 
 .main-content {
   position: relative;
+  height: 0;
   width: 100vw;
-  padding-top: 5%;
+  padding-top: 13%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -186,6 +187,10 @@ strong {
   font-size: smaller;
 }
 
+#text-right {
+  color: grey;
+}
+
 @media only screen and (max-width: 450px) {
   .footer {
     position: unset;
@@ -197,6 +202,8 @@ strong {
   }
 }
 
-#text-right {
-  color: grey;
+@media only screen and (max-width: 470px) {
+  .main-content {
+    padding: 0;
+  }
 }

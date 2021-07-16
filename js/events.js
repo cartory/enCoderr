@@ -112,7 +112,7 @@ const labelCoding = {
 }
 
 // DOCUMENT ELEMENTS 
-const select = document.getElementById('coder')
+const label = document.getElementById('coder')
 const selectCoding = document.getElementById('coding')
 
 const alphaField = document.getElementById('alpha')
@@ -143,19 +143,23 @@ alphaField.addEventListener('input', ({ target }) => {
     writeText()
 })
 
-select.addEventListener('change', ({ target }) => {
-    encode = target.value === 'encode'
+document.getElementById('switch').addEventListener('change', () => {
     let text = cardCenter.innerHTML
 
     if (encode) {
+        label.innerHTML = "DECODING"
         cardLeft.innerHTML = 'Text to Encode'
         cardRight.innerHTML = 'Encoded Text'
         cardCenter.innerHTML = text.replace('dec', 'enc')
     } else {
+        label.innerHTML = "ENCODING"
         cardLeft.innerHTML = 'Text to Decode'
         cardRight.innerHTML = 'Decoded Text'
         cardCenter.innerHTML = text.replace('enc', 'dec')
     }
+
+    encode = !encode
+
     writeText()
 })
 

@@ -129,7 +129,7 @@
         let ul = document.getElementById('students')
         students.forEach(student => {
             ul.innerHTML += `
-                <li title=${student.fullName}>
+                <li title="${student.fullName}">
                     <img class="student-profile" src=${student.src} alt="#" loading="lazy">
                     <a href=${student.github} target="_blank">${student.name}</a>
                 </li>

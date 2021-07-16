@@ -7,7 +7,7 @@ const cipher_type = {
     COLUMNA: 1,
 }
 
-class TranspositionCipher {
+export class TranspositionCipher {
     constructor() {
         this.text = "";
         this.table = "";
@@ -98,5 +98,3 @@ class TranspositionCipher {
         this.permutation = p;
     }
 }
-
-const vlada = new TranspositionCipher()

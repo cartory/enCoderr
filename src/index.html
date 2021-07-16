@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="assets/throwcode.png" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="assets/throwcode.png" type="image/x-icon"> -->
     <!-- STYLES -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/input.css">
-    <link rel="stylesheet" href="css/stars.css">
-    <link rel="stylesheet" href="css/github-corner.css">
+    <!-- <link rel="stylesheet" href="css/index.css"> -->
+    <!-- <link rel="stylesheet" href="css/input.css"> -->
+    <!-- <link rel="stylesheet" href="css/stars.css"> -->
+    <!-- <link rel="stylesheet" href="css/github-corner.css"> -->
     <!-- ROBOTO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,12 +29,12 @@
     <div class="stars"></div>
     <!-- OST -->
     <audio id="ost" loop autoplay>
-        <source id="ost-src" src="assets/amongus.mp3" type="audio/mp3">
+        <source id="ost-src" src="#" type="audio/mp3">
     </audio>
     <!-- PAGE -->
     <header class="header">
         <div class="container" style="padding: .4rem;">
-            <img src="assets/throwcode.png" alt="#">
+            <img id="logo" src="#" alt="#">
             <h1 class="header-title">
                 en<strong>coderr</strong>
             </h1>
@@ -113,29 +113,7 @@
         </svg>
     </a>
     <!-- SCRIPTS -->
-    <script src="js/data.js"></script>
-    <script src="js/transCol.js"></script>
-    <script src="js/events.js"></script>
-    <script src="js/encoding.js"></script>
-    <script src="js/decoding.js"></script>
-    <script type="text/javascript">
-        // MUSIC
-        let ost = document.getElementById('ost')
-        ost.volume = .2
-        ost.playbackRate = 1.1
-        document.addEventListener('click', async _ => await ost.play())
-
-        // LOADING STUDENTS
-        let ul = document.getElementById('students')
-        students.forEach(student => {
-            ul.innerHTML += `
-                <li title="${student.fullName}">
-                    <img class="student-profile" src=${student.src} alt="#" loading="lazy">
-                    <a href=${student.github} target="_blank">${student.name}</a>
-                </li>
-            `
-        })
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>

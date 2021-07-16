@@ -1,90 +1,14 @@
-// UTILS
-const isPrime = (num) => {
-    let sqrtNum = Math.floor(Math.sqrt(num))
-    while (sqrtNum > 1) {
-        if (num % sqrtNum-- === 0) return false
-    }
+import {
+    // caesar utils
+    getCi,
+    // series utils
+    isPrime,
+    // column/row utils
+    getOrderIndexAlpha, splitStringbyLength,
+    // ZigZag utils
+    buildColumns, iterateArrayStringDiagonally, iterateArrayStringValues,
+} from './utils'
 
-    return true && num > 1
-}
-
-const buildColumns = (string, nroColumns) => {
-    let cycle = nroColumns * 2 - 2
-    let width = Math.floor(string.length / cycle) * cycle + string.length % cycle
-
-    let arrayString = []
-    while (nroColumns-- > 0) arrayString.push(Array(width))
-
-    return arrayString
-}
-
-const getCi = (mi, moves = 0) => {
-    return mi.substring(moves, mi.length) + mi.substring(0, moves)
-}
-
-const iterateArrayStringDiagonally = (arrayString, callback) => {
-    let width = arrayString[0].length
-    let height = arrayString.length
-
-    let x = 0, y = 0, yDir
-
-    while (x++ < width) {
-        callback(x, y, arrayString[y][x])
-
-        if (!yDir) {
-            yDir = 1
-        } else if (y === 0 || y === height - 1) {
-            yDir = -yDir
-        }
-        y += yDir
-    }
-}
-
-const iterateArrayStringValues = (arrayString, callback) => {
-    for (let y = 0; y < arrayString.length; y++) {
-        for (let x = 0; x < arrayString[y].length; x++) {
-            if (arrayString[y][x] !== undefined) {
-                callback(x, y, arrayString[y][x])
-            }
-        }
-    }
-}
-
-const splitStringbyLength = (string, length) => {
-    let i = 0, res = []
-
-    while (i < string.length) {
-        res.push(string.substr(i, length))
-        i += length
-    }
-
-    let last = res.pop()
-
-    while (last.length < length) {
-        last += 'x'
-    }
-
-    return [...res, last]
-}
-
-/**
- * enumerating the key order e.g cat => act
- * @param {string} string 
- */
-const getOrderIndexAlpha = (key) => {
-    let sortKey = key.split('').sort()
-
-    return key
-        .split('')
-        .map((letter) => {
-            let pos = sortKey.indexOf(letter)
-            sortKey[pos] = null
-            return pos
-        })
-
-}
-
-/// ENCODERS
 /**
  * CryptoClassic - Caesar Encode
  * @param {string} mi is Alphabet
@@ -92,7 +16,7 @@ const getOrderIndexAlpha = (key) => {
  * @param {number} moves, number of moves (moves > 0)
  * @returns {string} encoded string
  */
-const caesarEncode = (mi, message, moves = 0) => {
+export const caesarEncode = (mi, message, moves = 0) => {
     let ci = getCi(mi, moves)
 
     let code = message.split('').map(letter => {
@@ -110,7 +34,7 @@ const caesarEncode = (mi, message, moves = 0) => {
  * @param {string} key, key word to encode
  * @returns {string} encoded string
  */
-const vigenereEncode = (mi, message, key) => {
+export const vigenereEncode = (mi, message, key) => {
     let chars = 0
     let code = message.split('').map((letter, index) => {
         let a = mi.indexOf(letter)
@@ -130,7 +54,7 @@ const vigenereEncode = (mi, message, key) => {
  * @param {string} key 
  * @returns {string}
  */
-const columnEncode = (text, key) => {
+export const columnEncode = (text, key) => {
     // enumerating the key order e.g cat => act
     let sortKey = getOrderIndexAlpha(key)
 
@@ -150,7 +74,7 @@ const columnEncode = (text, key) => {
  * @param {number} nroColumns 
  * @returns {string}
  */
-const zigzagEncode = (string, nroColumns) => {
+export const zigzagEncode = (string, nroColumns) => {
     const arrayString = buildColumns(string, nroColumns)
     const strArray = Array.from(string)
     iterateArrayStringDiagonally(arrayString, (x, y) => arrayString[y][x] = strArray.shift())
@@ -165,7 +89,7 @@ const zigzagEncode = (string, nroColumns) => {
  * @param {string} s 
  * @returns {string}
  */
-const monoEncode = (alpha, s, alphaCrypt) => {
+export const monoEncode = (alpha, s, alphaCrypt) => {
     let res = ''
 
     for (let i = 0; i < s.length; i++) {
@@ -199,8 +123,7 @@ const monoEncode = (alpha, s, alphaCrypt) => {
  * @param {string} message
  * @returns {string}
  */
-
-const seriesEncode = (text) => {
+export const seriesEncode = (text) => {
     let m1 = [], m2 = [], m3 = [], left = []
 
     text.split('').forEach((_, index) => {
@@ -232,8 +155,7 @@ const seriesEncode = (text) => {
  * @param {string} key 
  * @returns {string}
  */
-
-const rowEncode = (text, key) => {
+export const rowEncode = (text, key) => {
     // enumerating the key order e.g cat => act
     let sortKey = getOrderIndexAlpha(key)
     let cols = splitStringbyLength(text, key.length)

@@ -1,14 +1,11 @@
-// UTILS
-const splitLength = (chars, number) => {
-    let i = 0, res = []
-
-    while (i < chars.length) {
-        res.push(chars.substr(i, number))
-        i += number
-    }
-
-    return res
-}
+import {
+    // caesar utils
+    getCi,
+    // zigzag utils
+    buildColumns, iterateArrayStringDiagonally, iterateArrayStringValues,
+    // column/row utils
+    splitStringbyLength, getOrderIndexAlpha,
+} from './utils'
 
 /**
  * CryptoClassic - Caesar Encode
@@ -17,7 +14,7 @@ const splitLength = (chars, number) => {
  * @param {number} moves, number of moves (moves > 0)
  * @returns {string} decoded string
  */
-const caesarDecode = (mi, code, moves = 0) => {
+export const caesarDecode = (mi, code, moves = 0) => {
     let ci = getCi(mi, moves)
 
     let message = code.split('').map(letter => {
@@ -35,7 +32,7 @@ const caesarDecode = (mi, code, moves = 0) => {
  * @param {string} key, key word to decode 
  * @returns {string} decoded string
  */
-const vigenereDecode = (mi, code, key) => {
+export const vigenereDecode = (mi, code, key) => {
     let chars = 0
     let message = code.split('').map((letter, index) => {
         let a = mi.indexOf(letter)
@@ -58,8 +55,7 @@ const vigenereDecode = (mi, code, key) => {
  * @param {number} nroColumns 
  * @returns {string}
  */
-
-const zigzagDecode = (string, nroColumns) => {
+export const zigzagDecode = (string, nroColumns) => {
     const arrayString = buildColumns(string, nroColumns)
 
     iterateArrayStringDiagonally(arrayString, (x, y) => arrayString[y][x] = '-')
@@ -72,14 +68,12 @@ const zigzagDecode = (string, nroColumns) => {
     return re
 }
 
-
 /**
  * monoAlphabetic decoding 
  * @param {string} s 
  * @returns {string}
  */
-
-const monoDecode = (alpha, s, alphaCrypt) => {
+export const monoDecode = (alpha, s, alphaCrypt) => {
     let res = ''
 
     for (let i = 0; i < s.length; i++) {
@@ -112,8 +106,7 @@ const monoDecode = (alpha, s, alphaCrypt) => {
  * @param {string} text 
  * @param {number[][]} arrayIndex 
  */
-
-const seriesDecode = (text, arrayIndex) => {
+export const seriesDecode = (text, arrayIndex) => {
     let arr = []
     arrayIndex.forEach(pos => arr.push(...pos))
 
@@ -128,8 +121,7 @@ const seriesDecode = (text, arrayIndex) => {
  * @param {string} key
  * @returns {string}
  */
-
-const columnDecode = (text, key) => {
+export const columnDecode = (text, key) => {
     let sortKey = key.split('').sort()
 
     // enumerating the key order e.g cat => act
@@ -156,8 +148,7 @@ const columnDecode = (text, key) => {
  * @param {string} key 
  * @returns {string}
  */
-
-const rowDecode = (text, key) => {
+export const rowDecode = (text, key) => {
     // enumerating the key order e.g cat => act
     let sortKey = getOrderIndexAlpha(key)
 

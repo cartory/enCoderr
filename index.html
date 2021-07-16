@@ -29,7 +29,7 @@
     <div class="stars"></div>
     <!-- OST -->
     <audio id="ost" loop autoplay>
-        <source id="ost-src" src="assets/tokyo.mp3" type="audio/mp3">
+        <source id="ost-src" src="assets/amongus.mp3" type="audio/mp3">
     </audio>
     <!-- PAGE -->
     <header class="header">
@@ -44,10 +44,8 @@
         <div class="card">
             <div class="card-head">
                 <p id="info-left" class="card-info">Text to Encode</p>
-                <select id="coder" class="select">
-                    <option class="option" value="decode">decode</option>
-                    <option class="option" selected value="encode">encode</option>
-                </select>
+                <input class="toggle" id="switch" type="checkbox" />
+                <label class="switch" for="switch" id="coder">ENCODING</label>
             </div>
             <div class="card-body">
                 <textarea id="text-left" spellcheck="false" class="card-content" rows="10" cols="30"></textarea>
@@ -70,7 +68,7 @@
                             <option class="option" value="colNum">✅ Col-Num</option>
                             <option class="option" value="row">✅ transRow</option>
                             <!-- Substitution -->
-                            <option class="option" value="mono">✅ mono ⚠️</option>
+                            <option class="option" value="mono">✅ mono</option>
                             <option class="option" value="vigenere">✅ poli</option>
                         </select>
                     </div>

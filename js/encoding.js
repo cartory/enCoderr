@@ -1,6 +1,4 @@
 // UTILS
-const isEven = (num) => num % 2 === 0
-
 const isPrime = (num) => {
     let sqrtNum = Math.floor(Math.sqrt(num))
     while (sqrtNum > 1) {
@@ -19,7 +17,10 @@ const buildColumns = (string, nroColumns) => {
 
     return arrayString
 }
-const getCi = (mi, moves = 0) => mi.substring(moves, mi.length) + mi.substring(0, moves)
+
+const getCi = (mi, moves = 0) => {
+    return mi.substring(moves, mi.length) + mi.substring(0, moves)
+}
 
 const iterateArrayStringDiagonally = (arrayString, callback) => {
     let width = arrayString[0].length
@@ -42,7 +43,9 @@ const iterateArrayStringDiagonally = (arrayString, callback) => {
 const iterateArrayStringValues = (arrayString, callback) => {
     for (let y = 0; y < arrayString.length; y++) {
         for (let x = 0; x < arrayString[y].length; x++) {
-            if (arrayString[y][x] !== undefined) callback(x, y, arrayString[y][x])
+            if (arrayString[y][x] !== undefined) {
+                callback(x, y, arrayString[y][x])
+            }
         }
     }
 }
@@ -239,7 +242,6 @@ const rowEncode = (text, key) => {
 
     sortKey.forEach((pos, index) => {
         res[pos] = cols.map(word => word[index]).join('')
-        console.log(res);
     })
 
     return res.join('')

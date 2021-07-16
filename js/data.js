@@ -26,7 +26,7 @@ const students = [
     {
         name: "Melissa Sánchez",
         fullName: "Sánchez Cuellar Melissa",
-        github: "https://www.facebook.com/melissa.sanchezcuellar",
+        github: "https://github.com/MelissaSanchez20",
         src: "https://i.pinimg.com/originals/79/4e/ae/794eae170aa47f1f3aa843f135ee06ab.png",
     },
     {

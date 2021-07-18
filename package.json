@@ -1,6 +1,6 @@
 {
-  "name": "@cartory/encoderr",
-  "version": "1.0.0",
+  "name": "encoderr",
+  "version": "1.0.1",
   "description": "Algorithm for encoding and decoding",
   "main": "index.js",
   "directories": {

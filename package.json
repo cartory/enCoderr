@@ -1,6 +1,6 @@
 {
   "name": "encoderr",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Algorithm for encoding and decoding",
   "main": "index.js",
   "directories": {
@@ -25,7 +25,6 @@
     "url": "https://github.com/cartory/encoderr-package/issues"
   },
   "homepage": "https://github.com/cartory/encoderr-package#readme",
-  
   "publishConfig": {
     "cache": "cache/.npm",
     "@cartory:registry": "https://npm.pkg.github.com"

@@ -27,6 +27,7 @@
   "homepage": "https://github.com/cartory/encoderr-package#readme",
   
   "publishConfig": {
+    "cache": "cache/.npm",
     "@cartory:registry": "https://npm.pkg.github.com"
   }
 }

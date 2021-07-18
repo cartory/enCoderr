@@ -1,0 +1,32 @@
+{
+  "name": "encoderr",
+  "version": "1.0.3",
+  "description": "Algorithms for encoding and decoding",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cartory/encoderr-package.git"
+  },
+  "keywords": [
+    "encoding",
+    "decoding",
+    "javascript",
+    "cryptography"
+  ],
+  "author": "cartory",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cartory/encoderr-package/issues"
+  },
+  "homepage": "https://github.com/cartory/encoderr-package#readme",
+  "publishConfig": {
+    "cache": "cache/.npm",
+    "@cartory:registry": "https://npm.pkg.github.com"
+  }
+}

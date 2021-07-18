@@ -1,6 +1,6 @@
 {
   "name": "encoderr",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Algorithms for encoding and decoding",
   "main": "index.js",
   "directories": {

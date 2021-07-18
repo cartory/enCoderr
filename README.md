@@ -1,4 +1,4 @@
-[![version](https://img.shields.io/badge/1.0.1-fefe?version&label=version)](https://github.com/cartory/encoderr/tags)
+[![version](https://img.shields.io/badge/0.0.1-fefe?version&label=version)](https://github.com/cartory/encoderr/tags)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/cartory/enCoderr/blob/master/LICENSE)
 
 # Encoderr

@@ -1,7 +1,7 @@
 {
   "name": "encoderr",
   "version": "1.0.2",
-  "description": "Algorithm for encoding and decoding",
+  "description": "Algorithms for encoding and decoding",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -16,8 +16,8 @@
   "keywords": [
     "encoding",
     "decoding",
-    "cryptography",
-    "crypto"
+    "javascript",
+    "cryptography"
   ],
   "author": "cartory",
   "license": "MIT",

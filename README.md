@@ -71,9 +71,9 @@ console.log("decoded => ", params[1]);
 
 ## Authors
 
-**Pedro Caricari** - [cartory](https://github.com/cartory)
+**`cartory`** - [cartory](https://github.com/cartory)
 
-**GaboAP** - [GaboAP](https://github.com/GaboAP)
+**`GaboAP`** - [GaboAP](https://github.com/GaboAP)
 
 
 See also the list of [contributors](https://github.com/cartory/encoderr/contributors) who participated in this project.

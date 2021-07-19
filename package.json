@@ -27,6 +27,6 @@
   "homepage": "https://github.com/cartory/enCoderr#readme",
   "publishConfig": {
     "cache": "cache/.npm",
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://npm.pkg.github.com"
   }
 }

@@ -73,5 +73,6 @@ console.log("decoded => ", params[1]);
 
 **[`cartory`](https://github.com/cartory)**
 **[`GaboAP`](https://github.com/GaboAP)**
+**[`Erick328`](https://github.com/Erick328)**
 
 See also the list of [contributors](https://github.com/cartory/encoderr/contributors) who participated in this project.

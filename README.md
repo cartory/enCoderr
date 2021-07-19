@@ -70,7 +70,7 @@ console.log("decoded => ", params[1]);
 [![javascript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://devdocs.io/javascript/) [![love](https://img.shields.io/badge/love-red?style=for-the-badge&logo=julia&logoColor=white)](https://devdocs.io/javascript/)
 
 ## Authors
-
+**[`MelissaSanchez20`](https://github.com/MelissaSanchez20)**
 **[`cartory`](https://github.com/cartory)**
 **[`GaboAP`](https://github.com/GaboAP)**
 

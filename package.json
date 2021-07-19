@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cartory/encoderr-package.git"
+    "url": "git+https://github.com/cartory/enCoderr.git"
   },
   "keywords": [
     "encoding",
@@ -22,12 +22,11 @@
   "author": "cartory",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cartory/encoderr-package/issues"
+    "url": "https://github.com/cartory/enCoderr/issues"
   },
-  "homepage": "https://github.com/cartory/encoderr-package#readme",
+  "homepage": "https://github.com/cartory/enCoderr#readme",
   "publishConfig": {
     "cache": "cache/.npm",
-    "registry": "https://registry.npmjs.org",
-    "@cartory:registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   }
 }
